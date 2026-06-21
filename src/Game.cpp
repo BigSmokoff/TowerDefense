@@ -1,8 +1,13 @@
 #include "Game.h"
+#include "MainMenuScene.h"
+#include "GameScene.h"
+#include "SceneType.h"
+#include <memory>
 
-Game::Game(std::pair<unsigned int, unsigned int> windowSize, const char* name)
+Game::Game(sf::Vector2u windowSize, std::string_view name) :
+	window(sf::VideoMode({ windowSize.x, windowSize.y }), name),
+	currentScene(std::make_unique<MainMenuScene>(10.0f))
 {
-	window = sf::RenderWindow(sf::VideoMode({ windowSize.first, windowSize.second }), name);
 }
 
 void Game::run()
@@ -25,7 +30,7 @@ void Game::run()
 
 void Game::update(sf::Time deltaTime)
 {
-
+	currentScene->update(deltaTime);
 }
 
 void Game::processEvents()
@@ -35,7 +40,22 @@ void Game::processEvents()
 		if (event->is<sf::Event::Closed>())
 		{
 			window.close();
+		}
 
+		SceneType nextScene = currentScene->handleInput(*event);
+
+		switch (nextScene)
+		{
+		case SceneType::MainMenu:
+			currentScene = std::make_unique<MainMenuScene>(10.0f);
+			break;
+		case SceneType::GamePlay:
+			currentScene = std::make_unique<GameScene>(sf::Vector2f({ 300.0f, 300.0f }), 150.0f);
+			break;
+		case SceneType::None:
+			break;
+		default:
+			break;
 		}
 	}
 }
@@ -43,6 +63,8 @@ void Game::processEvents()
 void Game::render()
 {
 	window.clear();
+
+	currentScene->render(window);
 
 	window.display();
 }

@@ -24,6 +24,12 @@ add_executable(${PROJECT_NAME}
 	src/main.cpp
     src/Game.cpp
     src/Game.h
+	src/IScene.h
+	src/GameScene.h
+	src/GameScene.cpp
+	src/SceneType.h
+	src/MainMenuScene.h
+	src/MainMenuScene.cpp
 )
 
 # линукем модули SFML

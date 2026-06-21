@@ -1,0 +1,20 @@
+#pragma once
+#include "SFML/Graphics.hpp"
+#include "IScene.h"
+
+class MainMenuScene : public IScene
+{
+
+public:
+	MainMenuScene(float radius);
+	~MainMenuScene() = default;
+
+	void render(sf::RenderWindow& window) override;
+
+	void update(sf::Time deltaTime) override;
+
+	SceneType handleInput(const sf::Event& event) override;
+
+private:
+	sf::CircleShape circle;
+};
