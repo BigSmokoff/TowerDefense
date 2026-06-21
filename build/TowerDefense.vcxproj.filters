@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\smoko\OneDrive\Документы\Проекты\C++\TowerDefense\main.cpp">
+    <ClCompile Include="C:\Users\smoko\OneDrive\Документы\Проекты\C++\TowerDefense\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\smoko\OneDrive\Документы\Проекты\C++\TowerDefense\Game.cpp">
+    <ClCompile Include="C:\Users\smoko\OneDrive\Документы\Проекты\C++\TowerDefense\src\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\smoko\OneDrive\Документы\Проекты\C++\TowerDefense\Game.h">
+    <ClInclude Include="C:\Users\smoko\OneDrive\Документы\Проекты\C++\TowerDefense\src\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

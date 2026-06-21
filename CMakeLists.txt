@@ -1,18 +1,34 @@
 # задаем минимально требуемый стандарт сmake
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.24)
 # именуем проект и говорим что пишем на с++
-project(TowerDefense LANGUAGES CXX)
+project(TowerDefense VERSION 1.0 LANGUAGES CXX)
 
 # задаем минимально требуемый стандарт с++
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_STANDARD_REQUIRED ON)
-set(SFML_DIR "${CMAKE_CURRENT_SOURCE_DIR}/external/SFML-3.1.0/lib/cmake/SFML")
 
-# находим пакет SFML и создаем умные ярлыки
-find_package(SFML 3.1.0 COMPONENTS Graphics Window System REQUIRED)
+# отключаем сборку примеров и тестов
+set(SFML_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(SFML_BUILD_TEST_SUITE OFF CACHE BOOL "" FORCE)
+set(SFML_BUILD_DOC OFF CACHE BOOL "" FORCE)
 
-# объявляем исполняемый файл
-add_executable(TowerDefense main.cpp Game.cpp Game.h)
+if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/external/sfml/CMakeLists.txt")
+    message(FATAL_ERROR "SFML submodule не найден! Запустите: git submodule update --init --recursive")
+endif()
 
-# линкуем пакет по ярлыкам к проекту 
-target_link_libraries(TowerDefense PRIVATE SFML::Graphics SFML::Window SFML::System)
+# интегрируем исходный код SMFL и задаем путь для файлов компиляции
+add_subdirectory(external/sfml external/sfml/build_out)
+
+# объявляем исполняемый файл и перечисляем исходники
+add_executable(${PROJECT_NAME}
+	src/main.cpp
+    src/Game.cpp
+    src/Game.h
+)
+
+# линукем модули SFML
+target_link_libraries(${PROJECT_NAME} PRIVATE 
+    SFML::Graphics
+    SFML::Window
+    SFML::System
+)
