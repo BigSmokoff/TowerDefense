@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\smoko\OneDrive\Документы\Проекты\C++\TowerDefense\build\CMakeFiles\650ab427a112d9f3c5cd46223c3c797a\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{7741780E-7196-3ADE-9D07-CDBD4660A5AC}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,3 @@
+C:/Users/smoko/OneDrive/Документы/Проекты/C++/TowerDefense/build/CMakeFiles/TowerDefense.dir
+C:/Users/smoko/OneDrive/Документы/Проекты/C++/TowerDefense/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/smoko/OneDrive/Документы/Проекты/C++/TowerDefense/build/CMakeFiles/ZERO_CHECK.dir
