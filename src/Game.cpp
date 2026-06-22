@@ -28,9 +28,26 @@ void Game::run()
 	}
 }
 
+void Game::changeScene(SceneType nextScene)
+{
+	// смена сцены если был запрос
+	if (nextScene != SceneType::None)
+	{
+		switch (nextScene)
+		{
+		case SceneType::MainMenu:
+			currentScene = std::make_unique<MainMenuScene>(10.0f);
+			break;
+		case SceneType::GamePlay:
+			currentScene = std::make_unique<GameScene>();
+			break;
+		}
+	}
+}
+
 void Game::update(sf::Time deltaTime)
 {
-	currentScene->update(deltaTime);
+	changeScene(currentScene->update(deltaTime));
 }
 
 void Game::processEvents()
@@ -43,20 +60,8 @@ void Game::processEvents()
 		}
 
 		SceneType nextScene = currentScene->processEvent(*event);
-
-		if (nextScene != SceneType::None)
-		{
-			switch (nextScene)
-			{
-			case SceneType::MainMenu:
-				currentScene = std::make_unique<MainMenuScene>(10.0f);
-				break;
-			case SceneType::GamePlay:
-				currentScene = std::make_unique<GameScene>();
-				break;
-			}
-			break;
-		}
+		changeScene(nextScene);
+		break;
 	}
 }
 

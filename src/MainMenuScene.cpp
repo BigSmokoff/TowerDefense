@@ -13,8 +13,9 @@ void MainMenuScene::render(sf::RenderWindow& window)
 	window.draw(circle);
 }
 
-void MainMenuScene::update(sf::Time deltaTime)
+SceneType MainMenuScene::update(sf::Time deltaTime)
 {
+	return SceneType::None;
 }
 
 SceneType MainMenuScene::processEvent(const sf::Event& event)

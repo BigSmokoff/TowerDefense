@@ -19,14 +19,19 @@ void Monster::update(sf::Time deltaTime)
 	sf::Vector2 offset = { speed * deltaTime.asSeconds(), 0.0f };
 
 	sprite.move(offset);
-
-	if (sprite.getPosition().x > Config::SCREEN_WIDTH)
-	{
-		dead = true;
-	}
 }
 
 bool Monster::isDead() const
 {
 	return dead;
+}
+
+void Monster::kill()
+{
+	dead = true;
+}
+
+sf::FloatRect Monster::getBounds() const
+{
+	return sprite.getGlobalBounds();
 }

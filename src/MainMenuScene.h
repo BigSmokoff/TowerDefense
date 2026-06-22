@@ -9,9 +9,7 @@ public:
 	~MainMenuScene() = default;
 
 	void render(sf::RenderWindow& window) override;
-
-	void update(sf::Time deltaTime) override;
-
+	SceneType update(sf::Time deltaTime) override;
 	SceneType processEvent(const sf::Event& event) override;
 
 private:

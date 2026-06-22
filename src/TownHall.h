@@ -1,22 +1,22 @@
 #pragma once
-#include "SFML/Graphics.hpp"
 #include "GameObject.h"
 
-class Monster : public GameObject
+class TownHall : public GameObject
 {
 public:
-	Monster(sf::Vector2f size, sf::Vector2f pos, sf::Color color, float speed);
-	~Monster() = default;
+	TownHall(sf::Vector2f size, sf::Vector2f startPos, sf::Color color, int health);
+	virtual ~TownHall() = default;
 
 	void render(sf::RenderWindow& window) override;
 	void update(sf::Time deltaTime) override;
 	bool isDead() const override;
 	sf::FloatRect getBounds() const override;
 
-	void kill();
+	void takeDamage(int damage);
+	int getHealth() const;
 
 private:
 	sf::RectangleShape sprite;
-	float speed;
+	int health;
 	bool dead = false;
 };
