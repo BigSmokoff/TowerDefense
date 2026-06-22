@@ -15,6 +15,7 @@ public:
 
 private:
 	sf::RenderWindow window;
+	// делаем IScene чтобы можно было переключаться между сценами
 	std::unique_ptr<IScene> currentScene;
 
 	void update(sf::Time deltaTime);

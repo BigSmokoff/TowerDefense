@@ -42,7 +42,7 @@ void Game::processEvents()
 			window.close();
 		}
 
-		SceneType nextScene = currentScene->handleInput(*event);
+		SceneType nextScene = currentScene->processEvent(*event);
 
 		switch (nextScene)
 		{
@@ -50,7 +50,7 @@ void Game::processEvents()
 			currentScene = std::make_unique<MainMenuScene>(10.0f);
 			break;
 		case SceneType::GamePlay:
-			currentScene = std::make_unique<GameScene>(sf::Vector2f({ 300.0f, 300.0f }), 150.0f);
+			currentScene = std::make_unique<GameScene>();
 			break;
 		case SceneType::None:
 			break;

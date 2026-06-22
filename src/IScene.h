@@ -14,5 +14,5 @@ public:
 
 	virtual void update(sf::Time deltaTime) = 0;
 
-	virtual SceneType handleInput(const sf::Event& event) = 0;
+	virtual SceneType processEvent(const sf::Event& event) = 0;
 };
