@@ -8,14 +8,14 @@ public:
 	Monster(sf::Vector2f size, sf::Vector2f pos, sf::Color color, float speed);
 	~Monster() = default;
 
-private:
 	void render(sf::RenderWindow& window) override;
 
 	void update(sf::Time deltaTime) override;
 
+	bool isDead() const override;
+
 private:
 	sf::RectangleShape sprite;
-	sf::Vector2f size;
-	sf::Color color;
 	float speed;
+	bool dead = false;
 };

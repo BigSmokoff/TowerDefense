@@ -8,7 +8,6 @@ public:
 	MainMenuScene(float radius);
 	~MainMenuScene() = default;
 
-private:
 	void render(sf::RenderWindow& window) override;
 
 	void update(sf::Time deltaTime) override;
