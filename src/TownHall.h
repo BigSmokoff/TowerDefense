@@ -11,7 +11,6 @@ public:
 	void update(sf::Time deltaTime) override;
 	bool isDead() const override;
 	sf::FloatRect getBounds() const override;
-	void kill() override;
 
 	void takeDamage(int damage);
 	int getHealth() const;

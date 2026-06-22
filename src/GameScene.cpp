@@ -1,12 +1,14 @@
 #include "GameScene.h"
 #include "Monster.h"
+#include "Projectile.h"
 #include <memory>
 #include <vector>
 #include <iostream>
+#include <cmath>
 
 void GameScene::render(sf::RenderWindow& window)
 {
-	for (const auto& entity : entities)
+	for (const auto& entity : monsters)
 	{
 		entity->render(window);
 	}
@@ -18,6 +20,11 @@ void GameScene::render(sf::RenderWindow& window)
 	{
 		tower->render(window);
 	}
+
+	for (const auto& projectile : projectiles)
+	{
+		projectile->render(window);
+	}
 }
 
 SceneType GameScene::update(sf::Time deltaTime)
@@ -27,7 +34,7 @@ SceneType GameScene::update(sf::Time deltaTime)
 
 	if (spawnTimer >= 1.0f)
 	{
-		entities.push_back(factory.createBasicMonster(300.0f));
+		monsters.push_back(factory.createBasicMonster(300.0f));
 		spawnTimer = 0.0f;
 	}
 
@@ -35,28 +42,58 @@ SceneType GameScene::update(sf::Time deltaTime)
 
 	townHall.update(deltaTime);
 
-	// запускаем update каждому мобу
-	for (const auto& entity : entities)
+	// запускаем update каждому монстру
+	for (const auto& monster : monsters)
 	{
-		entity->update(deltaTime);
+		monster->update(deltaTime);
 
-		// если моб настиг ратушу
-		if (entity->getBounds().findIntersection(townHall.getBounds()))
+		// если монстр настиг ратушу
+		if (monster->getBounds().findIntersection(townHall.getBounds()))
 		{
 			townHall.takeDamage(1);
 
 			// временное убийство монстра когда он нанес урон
-			entity->kill();
+			monster->kill();
 		}
 	}
 
+	// обновляем башни и запускаем снаряды
 	for (const auto& tower : towers)
 	{
 		tower->update(deltaTime);
+		if (tower->canShoot())
+		{
+			for (const auto& monster : monsters)
+			{
+				float dx = monster->getPosition().x - tower->getPosition().x;
+				float dy = monster->getPosition().y - tower->getPosition().y;
+
+				float distanceToTarget = std::sqrt(dx * dx + dy * dy);
+
+				if (distanceToTarget < tower->getRange())
+				{
+					sf::Vector2f direction = monster->getPosition() - tower->getPosition();
+					direction = direction.normalized();
+					float x = tower->getPosition().x + tower->getSize().x / 2.0f;
+					float y = tower->getPosition().y + tower->getSize().y / 2.0f;
+
+					projectiles.push_back(std::make_unique<Projectile>
+						(sf::Vector2f(x, y), direction, sf::Color::Yellow, 200.0f, 10.0f));
+
+					tower->resetCooldown();
+					break;
+				}
+			}
+		}
+	}
+
+	for (const auto& projectile : projectiles)
+	{
+		projectile->update(deltaTime);
 	}
 
 	// удаляем "мертвых мобов"
-	std::erase_if(entities, [](const std::unique_ptr<GameObject>& obj) { return obj->isDead(); });
+	std::erase_if(monsters, [](const std::unique_ptr<GameObject>& obj) { return obj->isDead(); });
 
 	return SceneType::None;
 }
@@ -80,7 +117,7 @@ SceneType GameScene::processEvent(const sf::Event& event)
 			float sizeX = 50.0f, sizeY = 50.0f;
 			towers.push_back(std::make_unique<Tower>(
 				sf::Vector2f(sizeX, sizeY),
-				sf::Vector2f( mousePressed->position.x - sizeX / 2, mousePressed->position.y - sizeY / 2), 
+				sf::Vector2f(mousePressed->position.x - sizeX / 2, mousePressed->position.y - sizeY / 2),
 				sf::Color::Green)
 			);
 		}

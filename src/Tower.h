@@ -11,8 +11,14 @@ public:
 	void update(sf::Time deltaTime) override;
 	bool isDead() const override;
 	sf::FloatRect getBounds() const override;
-	void kill() override;
+	bool canShoot() const;
+	void resetCooldown();
+	float getRange() const;
+	sf::Vector2f getPosition() const override;
+	sf::Vector2f getSize() const;
 
 private:
 	sf::RectangleShape sprite;
+	float range = 300.0f;
+	float cooldownTimer = 1.0f;
 };

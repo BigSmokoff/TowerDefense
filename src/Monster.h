@@ -13,6 +13,7 @@ public:
 	bool isDead() const override;
 	sf::FloatRect getBounds() const override;
 	void kill() override;
+	sf::Vector2f getPosition() const override;
 
 private:
 	sf::RectangleShape sprite;

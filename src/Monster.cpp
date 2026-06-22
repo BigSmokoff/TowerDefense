@@ -35,3 +35,8 @@ sf::FloatRect Monster::getBounds() const
 {
 	return sprite.getGlobalBounds();
 }
+
+sf::Vector2f Monster::getPosition() const
+{
+	return sprite.getPosition();
+}

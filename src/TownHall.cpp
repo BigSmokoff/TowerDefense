@@ -19,8 +19,7 @@ void TownHall::update(sf::Time deltaTime)
 
 bool TownHall::isDead() const
 {
-	if (health <= 0) return true;
-	else return false;
+	return health <= 0;
 }
 
 sf::FloatRect TownHall::getBounds() const
@@ -36,8 +35,4 @@ void TownHall::takeDamage(int damage)
 int TownHall::getHealth() const
 {
 	return health;
-}
-
-void TownHall::kill()
-{
 }

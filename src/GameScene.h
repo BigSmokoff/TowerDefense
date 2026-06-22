@@ -16,8 +16,9 @@ public:
 	SceneType processEvent(const sf::Event& event) override;
 
 private:
-	std::vector<std::unique_ptr<GameObject>> entities;
+	std::vector<std::unique_ptr<GameObject>> monsters;
 	std::vector<std::unique_ptr<Tower>> towers;
+	std::vector<std::unique_ptr<GameObject>> projectiles;
 	MonsterFactory factory;
 	TownHall townHall = TownHall({ 80.0f, 80.0f }, { 800.0f, 300.0f }, sf::Color::Blue, 5);
 	float spawnTimer = 0.0f;

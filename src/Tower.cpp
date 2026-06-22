@@ -14,6 +14,7 @@ void Tower::render(sf::RenderWindow& window)
 
 void Tower::update(sf::Time deltaTime)
 {
+	cooldownTimer -= deltaTime.asSeconds();
 }
 
 bool Tower::isDead() const
@@ -26,6 +27,27 @@ sf::FloatRect Tower::getBounds() const
 	return sprite.getGlobalBounds();
 }
 
-void Tower::kill()
+bool Tower::canShoot() const
 {
+	return cooldownTimer < 0;
+}
+
+void Tower::resetCooldown()
+{
+	cooldownTimer = 1.0f;
+}
+
+float Tower::getRange() const
+{
+	return range;
+}
+
+sf::Vector2f Tower::getPosition() const
+{
+	return sprite.getPosition();
+}
+
+sf::Vector2f Tower::getSize() const
+{
+	return sprite.getSize();
 }

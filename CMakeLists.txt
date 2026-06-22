@@ -40,6 +40,8 @@ add_executable(${PROJECT_NAME}
 	src/TownHall.cpp
 	src/Tower.h
 	src/Tower.cpp
+	src/Projectile.h
+	src/Projectile.cpp
 )
 
 # линукем модули SFML
