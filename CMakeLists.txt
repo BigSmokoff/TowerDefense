@@ -38,6 +38,8 @@ add_executable(${PROJECT_NAME}
 	src/MonsterFactory.h
 	src/TownHall.h
 	src/TownHall.cpp
+	src/Tower.h
+	src/Tower.cpp
 )
 
 # линукем модули SFML

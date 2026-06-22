@@ -11,4 +11,5 @@ public:
 	virtual void update(sf::Time deltaTime) = 0;
 	virtual bool isDead() const = 0;
 	virtual sf::FloatRect getBounds() const = 0;
+	virtual void kill() = 0;
 };

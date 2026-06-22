@@ -13,6 +13,11 @@ void GameScene::render(sf::RenderWindow& window)
 
 	if (!townHall.isDead())
 		townHall.render(window);
+
+	for (const auto& tower : towers)
+	{
+		tower->render(window);
+	}
 }
 
 SceneType GameScene::update(sf::Time deltaTime)
@@ -41,8 +46,13 @@ SceneType GameScene::update(sf::Time deltaTime)
 			townHall.takeDamage(1);
 
 			// временное убийство монстра когда он нанес урон
-			dynamic_cast<Monster*>(entity.get())->kill();
+			entity->kill();
 		}
+	}
+
+	for (const auto& tower : towers)
+	{
+		tower->update(deltaTime);
 	}
 
 	// удаляем "мертвых мобов"
@@ -59,6 +69,20 @@ SceneType GameScene::processEvent(const sf::Event& event)
 		if (keyPressed->code == sf::Keyboard::Key::Space)
 		{
 			return SceneType::MainMenu;
+		}
+	}
+
+	// добавление в вектор башен, при нажатии лкм 
+	if (const auto* mousePressed = event.getIf<sf::Event::MouseButtonPressed>())
+	{
+		if (mousePressed->button == sf::Mouse::Button::Left)
+		{
+			float sizeX = 50.0f, sizeY = 50.0f;
+			towers.push_back(std::make_unique<Tower>(
+				sf::Vector2f(sizeX, sizeY),
+				sf::Vector2f( mousePressed->position.x - sizeX / 2, mousePressed->position.y - sizeY / 2), 
+				sf::Color::Green)
+			);
 		}
 	}
 	return SceneType::None;

@@ -3,6 +3,7 @@
 #include "TownHall.h"
 #include "IScene.h"
 #include "MonsterFactory.h"
+#include "Tower.h"
 
 class GameScene : public IScene
 {
@@ -16,6 +17,7 @@ public:
 
 private:
 	std::vector<std::unique_ptr<GameObject>> entities;
+	std::vector<std::unique_ptr<Tower>> towers;
 	MonsterFactory factory;
 	TownHall townHall = TownHall({ 80.0f, 80.0f }, { 800.0f, 300.0f }, sf::Color::Blue, 5);
 	float spawnTimer = 0.0f;

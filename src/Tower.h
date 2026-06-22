@@ -1,12 +1,11 @@
 #pragma once
-#include "SFML/Graphics.hpp"
 #include "GameObject.h"
 
-class Monster : public GameObject
+class Tower : public GameObject
 {
 public:
-	Monster(sf::Vector2f size, sf::Vector2f pos, sf::Color color, float speed);
-	~Monster() = default;
+	Tower(sf::Vector2f size, sf::Vector2f pos, sf::Color color);
+	virtual ~Tower() = default;
 
 	void render(sf::RenderWindow& window) override;
 	void update(sf::Time deltaTime) override;
@@ -16,6 +15,4 @@ public:
 
 private:
 	sf::RectangleShape sprite;
-	float speed;
-	bool dead = false;
 };

@@ -37,3 +37,7 @@ int TownHall::getHealth() const
 {
 	return health;
 }
+
+void TownHall::kill()
+{
+}

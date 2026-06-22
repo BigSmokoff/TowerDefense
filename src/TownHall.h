@@ -11,6 +11,7 @@ public:
 	void update(sf::Time deltaTime) override;
 	bool isDead() const override;
 	sf::FloatRect getBounds() const override;
+	void kill() override;
 
 	void takeDamage(int damage);
 	int getHealth() const;
@@ -18,5 +19,4 @@ public:
 private:
 	sf::RectangleShape sprite;
 	int health;
-	bool dead = false;
 };
