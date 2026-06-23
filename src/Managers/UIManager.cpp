@@ -15,10 +15,14 @@ UIManager::UIManager()
 	}
 }
 
-void UIManager::update(std::string gold, std::string townHealth)
+void UIManager::updateGold(unsigned int gold)
 {
-	this->townHealth.setString("Health: " + townHealth);
-	this->goldCounter.setString("Gold: " + gold);
+	goldCounter.setString("Gold: " + std::to_string(gold));
+}
+
+void UIManager::updateHealth(unsigned int health)
+{
+	townHealth.setString("Health: " + std::to_string(health));
 }
 
 void UIManager::render(sf::RenderWindow& window)

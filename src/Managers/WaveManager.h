@@ -1,6 +1,6 @@
 #pragma once
 #include "../GameObjects/GameObject.h"
-#include "../Factories/MonsterFactory.h"
+#include "../Managers/MonsterFactory.h"
 #include <vector>
 #include <memory>
 

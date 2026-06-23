@@ -6,6 +6,25 @@
 #include <vector>
 #include <cmath>
 
+GameScene::GameScene()
+{
+	// подписываемс€ на изменение золота
+	playerState.onGoldChanged = [this](unsigned int newGold) 
+	{ 
+		uiManager.updateGold(newGold); 
+	};
+
+	// ѕодписываемс€ на изменение здоровь€ ратуши
+	townHall.onHealthChanged = [this](int newHealth)
+	{
+		uiManager.updateHealth(newHealth);
+	};
+
+	// иницализируем начальными значени€ми
+	playerState.addGold(50);
+	townHall.updateHealth(5);
+}
+
 void GameScene::render(sf::RenderWindow& window)
 {
 	for (const auto& entity : monsters)
@@ -112,8 +131,6 @@ SceneType GameScene::update(sf::Time deltaTime)
 	// удал€ем "мертвых сущностей"
 	std::erase_if(monsters, [](const std::unique_ptr<GameObject>& obj) { return obj->isDead(); });
 	std::erase_if(projectiles, [](const std::unique_ptr<GameObject>& obj) { return obj->isDead(); });
-
-	uiManager.update(std::to_string(playerState.getGold()), std::to_string(townHall.getHealth()));
 
 	return SceneType::None;
 }

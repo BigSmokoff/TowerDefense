@@ -1,4 +1,4 @@
-#include "../Scenes/WaveManager.h"
+#include "../Managers/WaveManager.h"
 
 WaveManager::WaveManager(std::vector<std::unique_ptr<GameObject>>& monstersRef)
 	: monstersRef(monstersRef)

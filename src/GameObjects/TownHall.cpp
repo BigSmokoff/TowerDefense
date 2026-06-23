@@ -1,7 +1,6 @@
 #include "../GameObjects/TownHall.h"
 
-TownHall::TownHall(sf::Vector2f size, sf::Vector2f startPos, sf::Color color, int health)
-	: health(health)
+TownHall::TownHall(sf::Vector2f size, sf::Vector2f startPos, sf::Color color)
 {
 	sprite.setSize(size);
 	sprite.setPosition(startPos);
@@ -30,9 +29,24 @@ sf::FloatRect TownHall::getBounds() const
 void TownHall::takeDamage(int damage)
 {
 	health -= damage;
+
+	if (onHealthChanged)
+	{
+		onHealthChanged(health);
+	}
 }
 
 int TownHall::getHealth() const
 {
 	return health;
+}
+
+void TownHall::updateHealth(int health)
+{
+	this->health = health;
+
+	if (onHealthChanged)
+	{
+		onHealthChanged(health);
+	}
 }

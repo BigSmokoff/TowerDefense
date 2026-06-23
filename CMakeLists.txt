@@ -46,6 +46,8 @@ add_executable(${PROJECT_NAME}
 	src/Managers/WaveManager.cpp
 	src/Managers/PlayerState.h
 	src/Managers/PlayerState.cpp
+	src/Managers/UIManager.h
+	src/Managers/UIManager.cpp
 )
 
 # настройка рабочего каталога для Visual Studio

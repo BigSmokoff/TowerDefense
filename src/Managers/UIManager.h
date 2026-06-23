@@ -8,7 +8,8 @@ public:
 	UIManager();
 	~UIManager() = default;
 
-	void update(std::string gold, std::string townHealth);
+	void updateGold(unsigned int gold);
+	void updateHealth(unsigned int health);
 	void render(sf::RenderWindow& window);
 
 private:
