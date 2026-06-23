@@ -1,5 +1,5 @@
-#include "Monster.h"
-#include "Config.h"
+#include "../GameObjects/Monster.h"
+#include "../Core/Config.h"
 
 Monster::Monster(sf::Vector2f size, sf::Vector2f startPos, sf::Color color, float speed)
 	: speed(speed)

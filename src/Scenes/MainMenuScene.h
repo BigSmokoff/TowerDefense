@@ -1,6 +1,6 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#include "IScene.h"
+#include "../Scenes/IScene.h"
 
 class MainMenuScene : public IScene
 {

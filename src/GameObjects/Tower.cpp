@@ -1,4 +1,4 @@
-#include "Tower.h"
+#include "../GameObjects/Tower.h"
 
 Tower::Tower(sf::Vector2f size, sf::Vector2f pos, sf::Color color)
 {

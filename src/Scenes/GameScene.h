@@ -1,14 +1,17 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#include "TownHall.h"
-#include "IScene.h"
-#include "MonsterFactory.h"
-#include "Tower.h"
+#include "../GameObjects/TownHall.h"
+#include "../GameObjects/Tower.h"
+#include "../Scenes/IScene.h"
+#include "../Scenes/WaveManager.h"
+#include "../Managers/MonsterFactory.h"
+#include "../Managers/PlayerState.h"
+#include "../Managers/UIManager.h"
 
 class GameScene : public IScene
 {
 public:
-	GameScene();
+	GameScene() = default;
 	~GameScene() = default;
 
 	void render(sf::RenderWindow& window) override;
@@ -20,10 +23,7 @@ private:
 	std::vector<std::unique_ptr<GameObject>> projectiles;
 	std::vector<std::unique_ptr<Tower>> towers;
 	TownHall townHall = TownHall({ 80.0f, 80.0f }, { 800.0f, 300.0f }, sf::Color::Blue, 5);
-	MonsterFactory factory;
-	float spawnTimer = 0.0f;
-	sf::Font font;
-	unsigned int gold = 50;
-	sf::Text goldCounter;
-	sf::Text townHealth;
+	WaveManager waveManager = WaveManager(monsters);
+	PlayerState playerState = PlayerState(50);
+	UIManager uiManager;
 };

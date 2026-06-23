@@ -1,4 +1,4 @@
-#include "MainMenuScene.h"
+#include "../Scenes/MainMenuScene.h"
 
 MainMenuScene::MainMenuScene(float radius)
 	: circle(radius)

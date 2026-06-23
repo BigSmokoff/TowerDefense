@@ -1,7 +1,7 @@
-#include "Game.h"
-#include "MainMenuScene.h"
-#include "GameScene.h"
-#include "SceneType.h"
+#include "../Core/Game.h"
+#include "../Scenes/MainMenuScene.h"
+#include "../Scenes/GameScene.h"
+#include "../Scenes/SceneType.h"
 #include <memory>
 
 Game::Game(sf::Vector2u windowSize, std::string_view name) :

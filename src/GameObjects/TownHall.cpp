@@ -1,4 +1,4 @@
-#include "TownHall.h"
+#include "../GameObjects/TownHall.h"
 
 TownHall::TownHall(sf::Vector2f size, sf::Vector2f startPos, sf::Color color, int health)
 	: health(health)

@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "../Scenes/IScene.h"
 #include <string_view>
-#include "IScene.h"
 #include <memory>
 
 class Game

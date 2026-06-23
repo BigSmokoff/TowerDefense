@@ -1,5 +1,5 @@
-#include "MonsterFactory.h"
-#include "Monster.h"
+#include "../Managers/MonsterFactory.h"
+#include "../GameObjects/Monster.h"
 
 std::unique_ptr<GameObject> MonsterFactory::createBasicMonster(float startY)
 {

@@ -21,27 +21,31 @@ add_subdirectory(external/sfml external/sfml/build_out)
 
 # объявляем исполняемый файл и перечисляем исходники
 add_executable(${PROJECT_NAME}
-	src/main.cpp
-	src/Config.h
-    src/Game.cpp
-    src/Game.h
-	src/IScene.h
-	src/GameScene.h
-	src/GameScene.cpp
-	src/SceneType.h
-	src/MainMenuScene.h
-	src/MainMenuScene.cpp
-	src/GameObject.h
-	src/Monster.h
-	src/Monster.cpp
-	src/MonsterFactory.cpp
-	src/MonsterFactory.h
-	src/TownHall.h
-	src/TownHall.cpp
-	src/Tower.h
-	src/Tower.cpp
-	src/Projectile.h
-	src/Projectile.cpp
+	src/Core/main.cpp
+	src/Core/Config.h
+	src/Core/Game.h
+	src/Core/Game.cpp
+	src/Scenes/IScene.h
+	src/Scenes/GameScene.h
+	src/Scenes/GameScene.cpp
+	src/Scenes/SceneType.h
+	src/Scenes/MainMenuScene.h
+	src/Scenes/MainMenuScene.cpp
+	src/GameObjects/GameObject.h
+	src/GameObjects/Monster.h
+	src/GameObjects/Monster.cpp
+	src/Managers/MonsterFactory.cpp
+	src/Managers/MonsterFactory.h
+	src/GameObjects/TownHall.h
+	src/GameObjects/TownHall.cpp
+	src/GameObjects/Tower.h
+	src/GameObjects/Tower.cpp
+	src/GameObjects/Projectile.h
+	src/GameObjects/Projectile.cpp
+	src/Managers/WaveManager.h
+	src/Managers/WaveManager.cpp
+	src/Managers/PlayerState.h
+	src/Managers/PlayerState.cpp
 )
 
 # настройка рабочего каталога для Visual Studio

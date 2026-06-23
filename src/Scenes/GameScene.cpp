@@ -1,24 +1,10 @@
-#include "GameScene.h"
-#include "Monster.h"
-#include "Config.h"
-#include "Projectile.h"
+#include "../Scenes/GameScene.h"
+#include "../Core/Config.h"
+#include "../GameObjects/Monster.h"
+#include "../GameObjects/Projectile.h"
 #include <memory>
 #include <vector>
 #include <cmath>
-
-GameScene::GameScene()
-	: font(), goldCounter(font), townHealth(font)
-{
-	if (font.openFromFile("assets/fonts/TILDASANS-VF.TTF"))
-	{
-		goldCounter.setCharacterSize(30);
-		townHealth.setCharacterSize(30);
-		goldCounter.setFillColor(sf::Color::White);
-		townHealth.setFillColor(sf::Color::White);
-		goldCounter.setPosition(sf::Vector2f(20.0f, Config::SCREEN_HEIGHT - 50.0f));
-		townHealth.setPosition(sf::Vector2f(780.0f, 400.0f));
-	}
-}
 
 void GameScene::render(sf::RenderWindow& window)
 {
@@ -41,20 +27,12 @@ void GameScene::render(sf::RenderWindow& window)
 		projectile->render(window);
 	}
 
-	window.draw(goldCounter);
-	window.draw(townHealth);
+	uiManager.render(window);
 }
 
 SceneType GameScene::update(sf::Time deltaTime)
 {
-	// спавн монстров каждые 1 сек
-	spawnTimer += deltaTime.asSeconds();
-
-	if (spawnTimer >= 1.0f)
-	{
-		monsters.push_back(factory.createBasicMonster(300.0f));
-		spawnTimer = 0.0f;
-	}
+	waveManager.update(deltaTime);
 
 	if (townHall.isDead()) return SceneType::MainMenu;
 
@@ -125,7 +103,7 @@ SceneType GameScene::update(sf::Time deltaTime)
 			{
 				monster->kill();
 				projectile->kill();
-				gold += 10;
+				playerState.addGold(10);
 				break;
 			}
 		}
@@ -135,8 +113,7 @@ SceneType GameScene::update(sf::Time deltaTime)
 	std::erase_if(monsters, [](const std::unique_ptr<GameObject>& obj) { return obj->isDead(); });
 	std::erase_if(projectiles, [](const std::unique_ptr<GameObject>& obj) { return obj->isDead(); });
 
-	townHealth.setString("Health: " + std::to_string(townHall.getHealth()));
-	goldCounter.setString("Gold: " + std::to_string(gold));
+	uiManager.update(std::to_string(playerState.getGold()), std::to_string(townHall.getHealth()));
 
 	return SceneType::None;
 }
@@ -158,9 +135,8 @@ SceneType GameScene::processEvent(const sf::Event& event)
 		if (mousePressed->button == sf::Mouse::Button::Left)
 		{
 			// если достаточно денег то ставим башню
-			if (gold >= 50)
+			if (playerState.spendGold(50))
 			{
-				gold -= 50;
 				float sizeX = 50.0f, sizeY = 50.0f;
 				towers.push_back(std::make_unique<Tower>(
 					sf::Vector2f(sizeX, sizeY),

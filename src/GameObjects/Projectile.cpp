@@ -1,5 +1,5 @@
-#include "Projectile.h"
-#include "Config.h"
+#include "../GameObjects/Projectile.h"
+#include "../Core/Config.h"
 
 Projectile::Projectile(sf::Vector2f startPos, sf::Vector2f direction, sf::Color color, float speed, float radius)
 	:  direction(direction), speed(speed)

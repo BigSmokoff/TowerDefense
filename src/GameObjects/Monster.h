@@ -1,6 +1,6 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#include "GameObject.h"
+#include "../GameObjects/GameObject.h"
 
 class Monster : public GameObject
 {

@@ -1,5 +1,5 @@
-#include "Game.h"
-#include "Config.h"
+#include "../Core/Game.h"
+#include "../Core/Config.h"
 #include <utility>
 
 int main()

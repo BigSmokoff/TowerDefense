@@ -1,6 +1,6 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#include "SceneType.h"
+#include "../Scenes/SceneType.h"
 
 class IScene
 {
