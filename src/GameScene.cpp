@@ -72,10 +72,17 @@ SceneType GameScene::update(sf::Time deltaTime)
 
 				if (distanceToTarget < tower->getRange())
 				{
-					sf::Vector2f direction = monster->getPosition() - tower->getPosition();
-					direction = direction.normalized();
-					float x = tower->getPosition().x + tower->getSize().x / 2.0f;
-					float y = tower->getPosition().y + tower->getSize().y / 2.0f;
+					target = monster.get();
+					minDistance = distanceToTarget;
+				}
+			}
+
+			if (target == nullptr) continue;
+
+			sf::Vector2f direction = target->getPosition() - tower->getPosition();
+			direction = direction.normalized();
+			float x = tower->getPosition().x + tower->getSize().x / 2.0f;
+			float y = tower->getPosition().y + tower->getSize().y / 2.0f;
 
 					projectiles.push_back(std::make_unique<Projectile>
 						(sf::Vector2f(x, y), direction, sf::Color::Yellow, 200.0f, 10.0f));
