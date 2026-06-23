@@ -18,7 +18,7 @@ void Projectile::update(sf::Time deltaTime)
 {
 	bool outOfBounds = Config::SCREEN_HEIGHT <= sprite.getPosition().y ||
 	                   Config::SCREEN_WIDTH <= sprite.getPosition().x ||
-	                   0.0f >= sprite.getPosition().x ||
+	                   0.0f >= sprite.getPosition().y ||
 	                   0.0f >= sprite.getPosition().x;
 
 	if (outOfBounds)
@@ -31,10 +31,15 @@ void Projectile::update(sf::Time deltaTime)
 
 bool Projectile::isDead() const
 {
-	return false;
+	return dead;
 }
 
 sf::FloatRect Projectile::getBounds() const
 {
 	return sprite.getGlobalBounds();
+}
+
+void Projectile::kill()
+{
+	dead = true;
 }

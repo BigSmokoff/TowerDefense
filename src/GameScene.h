@@ -8,7 +8,7 @@
 class GameScene : public IScene
 {
 public:
-	GameScene() = default;
+	GameScene();
 	~GameScene() = default;
 
 	void render(sf::RenderWindow& window) override;
@@ -17,9 +17,13 @@ public:
 
 private:
 	std::vector<std::unique_ptr<GameObject>> monsters;
-	std::vector<std::unique_ptr<Tower>> towers;
 	std::vector<std::unique_ptr<GameObject>> projectiles;
-	MonsterFactory factory;
+	std::vector<std::unique_ptr<Tower>> towers;
 	TownHall townHall = TownHall({ 80.0f, 80.0f }, { 800.0f, 300.0f }, sf::Color::Blue, 5);
+	MonsterFactory factory;
 	float spawnTimer = 0.0f;
+	sf::Font font;
+	unsigned int gold = 50;
+	sf::Text goldCounter;
+	sf::Text townHealth;
 };

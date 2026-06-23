@@ -44,6 +44,11 @@ add_executable(${PROJECT_NAME}
 	src/Projectile.cpp
 )
 
+# настройка рабочего каталога для Visual Studio
+set_target_properties(TowerDefense PROPERTIES
+    VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+)
+
 # линукем модули SFML
 target_link_libraries(${PROJECT_NAME} PRIVATE 
     SFML::Graphics
