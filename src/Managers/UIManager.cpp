@@ -8,10 +8,17 @@ UIManager::UIManager()
 	{
 		goldCounter.setCharacterSize(30);
 		townHealth.setCharacterSize(30);
+
 		goldCounter.setFillColor(sf::Color::White);
 		townHealth.setFillColor(sf::Color::White);
-		goldCounter.setPosition(sf::Vector2f(20.0f, Config::SCREEN_HEIGHT - 50.0f));
-		townHealth.setPosition(sf::Vector2f(780.0f, 400.0f));
+
+		sf::Vector2f goldCounterCenter = goldCounter.getLocalBounds().getCenter();
+		goldCounter.setOrigin(goldCounterCenter);
+		sf::Vector2f townHealthCenter = townHealth.getLocalBounds().getCenter();
+		townHealth.setOrigin(townHealthCenter);
+
+		goldCounter.setPosition(sf::Vector2f(20.0f, Config::SCREEN_HEIGHT - 50));
+		townHealth.setPosition(sf::Vector2f(720.0f, 350.0f));
 	}
 }
 

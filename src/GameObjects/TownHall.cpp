@@ -1,8 +1,11 @@
 #include "../GameObjects/TownHall.h"
 
-TownHall::TownHall(sf::Vector2f size, sf::Vector2f startPos, sf::Color color)
+TownHall::TownHall(sf::Vector2f size, sf::Vector2f startPos, sf::Color color, int health)
+	: health(health)
 {
 	sprite.setSize(size);
+	sf::Vector2f townCenter = sprite.getLocalBounds().getCenter();
+	sprite.setOrigin(townCenter);
 	sprite.setPosition(startPos);
 	sprite.setFillColor(color);
 }

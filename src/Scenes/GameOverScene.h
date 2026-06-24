@@ -3,18 +3,20 @@
 #include "../Scenes/IScene.h"
 #include "../Managers/EventHandler.h"
 
-class MainMenuScene : public IScene
+class GameOverScene : public IScene
 {
 public:
-	MainMenuScene(float radius);
-	~MainMenuScene() = default;
+	GameOverScene();
+	~GameOverScene() = default;
 
 	void render(sf::RenderWindow& window) override;
 	SceneType update(sf::Time deltaTime) override;
 	SceneType processEvent(const sf::Event& event) override;
 
 private:
-	sf::CircleShape circle;
+	sf::Font font;
+	sf::Text title;
+	sf::Text subtitle;
 	EventHandler eventHandler;
 	SceneType nextScene = SceneType::None;
 };

@@ -2,6 +2,7 @@
 #include "../Scenes/MainMenuScene.h"
 #include "../Scenes/GameScene.h"
 #include "../Scenes/SceneType.h"
+#include "../Scenes/GameOverScene.h"
 #include <memory>
 
 Game::Game(sf::Vector2u windowSize, std::string_view name) :
@@ -40,6 +41,9 @@ void Game::changeScene(SceneType nextScene)
 			break;
 		case SceneType::GamePlay:
 			currentScene = std::make_unique<GameScene>();
+			break;
+		case SceneType::GameOver:
+			currentScene = std::make_unique<GameOverScene>();
 			break;
 		}
 	}

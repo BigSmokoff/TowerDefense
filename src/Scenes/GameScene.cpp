@@ -9,20 +9,44 @@
 GameScene::GameScene()
 {
 	// подписываемся на изменение золота
-	playerState.onGoldChanged = [this](unsigned int newGold) 
-	{ 
-		uiManager.updateGold(newGold); 
-	};
+	playerState.onGoldChanged = [this](unsigned int newGold)
+		{
+			uiManager.updateGold(newGold);
+		};
 
 	// Подписываемся на изменение здоровья ратуши
 	townHall.onHealthChanged = [this](int newHealth)
-	{
-		uiManager.updateHealth(newHealth);
-	};
+		{
+			uiManager.updateHealth(newHealth);
+		};
 
 	// иницализируем начальными значениями
 	playerState.addGold(50);
-	townHall.updateHealth(5);
+	townHall.updateHealth(1000);
+
+	waveManager.onReachedBase = [this]() { townHall.takeDamage(1); };
+
+	eventHandler.bindInput(sf::Keyboard::Key::Space, Action::BackToMenu);
+	eventHandler.bindInput(sf::Mouse::Button::Left, Action::PlaceTheTower);
+	eventHandler.addCallback(Action::BackToMenu, [this](sf::Vector2i) { nextScene = SceneType::MainMenu; });
+	eventHandler.addCallback(Action::PlaceTheTower, [this](sf::Vector2i mousePos)
+		{
+			if (playerState.spendGold(50))
+			{
+				float sizeX = 50.0f, sizeY = 50.0f;
+
+				sf::Vector2f spawnPos(
+					static_cast<float>(mousePos.x) - sizeX / 2.0f,
+					static_cast<float>(mousePos.y) - sizeY / 2.0f
+				);
+
+				towers.push_back(std::make_unique<Tower>(
+					sf::Vector2f(sizeX, sizeY),
+					spawnPos,
+					sf::Color::Green
+				));
+			}
+		});
 }
 
 void GameScene::render(sf::RenderWindow& window)
@@ -53,7 +77,7 @@ SceneType GameScene::update(sf::Time deltaTime)
 {
 	waveManager.update(deltaTime);
 
-	if (townHall.isDead()) return SceneType::MainMenu;
+	if (townHall.isDead()) return SceneType::GameOver;
 
 	townHall.update(deltaTime);
 
@@ -61,15 +85,6 @@ SceneType GameScene::update(sf::Time deltaTime)
 	for (const auto& monster : monsters)
 	{
 		monster->update(deltaTime);
-
-		// если монстр настиг ратушу
-		if (monster->getBounds().findIntersection(townHall.getBounds()))
-		{
-			townHall.takeDamage(1);
-
-			// временное убийство монстра когда он нанес урон
-			monster->kill();
-		}
 	}
 
 	// обновляем башни и запускаем снаряды
@@ -137,31 +152,8 @@ SceneType GameScene::update(sf::Time deltaTime)
 
 SceneType GameScene::processEvent(const sf::Event& event)
 {
-	// обработка события смены сцены (нажатый пробел)
-	if (const auto* keyPressed = event.getIf<sf::Event::KeyPressed>())
-	{
-		if (keyPressed->code == sf::Keyboard::Key::Space)
-		{
-			return SceneType::MainMenu;
-		}
-	}
+	nextScene = SceneType::None;
+	eventHandler.processEvent(event);
 
-	// добавление в вектор башен, при нажатии лкм 
-	if (const auto* mousePressed = event.getIf<sf::Event::MouseButtonPressed>())
-	{
-		if (mousePressed->button == sf::Mouse::Button::Left)
-		{
-			// если достаточно денег то ставим башню
-			if (playerState.spendGold(50))
-			{
-				float sizeX = 50.0f, sizeY = 50.0f;
-				towers.push_back(std::make_unique<Tower>(
-					sf::Vector2f(sizeX, sizeY),
-					sf::Vector2f(mousePressed->position.x - sizeX / 2, mousePressed->position.y - sizeY / 2),
-					sf::Color::Green)
-				);
-			}
-		}
-	}
-	return SceneType::None;
+	return nextScene;
 }

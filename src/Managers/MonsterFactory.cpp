@@ -1,7 +1,9 @@
 #include "../Managers/MonsterFactory.h"
 #include "../GameObjects/Monster.h"
 
-std::unique_ptr<GameObject> MonsterFactory::createBasicMonster(float startY)
+std::unique_ptr<GameObject> MonsterFactory::createBasicMonster(const std::vector<sf::Vector2f>& waypoints, std::function<void()> onBaseReachedCallback)
 {
-	return std::make_unique<Monster>(sf::Vector2f(50.0f, 50.0f), sf::Vector2f(0.0f, startY), sf::Color::Red, 150.0);
+	auto monster = std::make_unique<Monster>(monsterSize, waypoints, monsterColor, movementSpeed);
+	monster->onReachedBase = onBaseReachedCallback;
+	return std::move(monster);
 }

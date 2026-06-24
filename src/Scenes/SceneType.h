@@ -4,5 +4,6 @@ enum class SceneType
 {
 	None,
 	MainMenu,
-	GamePlay
+	GamePlay,
+	GameOver
 };

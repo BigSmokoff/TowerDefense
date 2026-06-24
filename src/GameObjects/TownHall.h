@@ -4,7 +4,7 @@
 class TownHall : public GameObject
 {
 public:
-	TownHall(sf::Vector2f size, sf::Vector2f startPos, sf::Color color);
+	TownHall(sf::Vector2f size, sf::Vector2f startPos, sf::Color color, int health);
 	virtual ~TownHall() = default;
 
 	void render(sf::RenderWindow& window) override;
@@ -20,5 +20,5 @@ public:
 
 private:
 	sf::RectangleShape sprite;
-	int health = 5;
+	int health;
 };

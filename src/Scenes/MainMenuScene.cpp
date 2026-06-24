@@ -6,6 +6,8 @@ MainMenuScene::MainMenuScene(float radius)
 	circle.setRadius(radius);
 	circle.setFillColor(sf::Color::Blue);
 	circle.setPosition({ 600, 500 });
+	eventHandler.bindInput(sf::Keyboard::Key::Space, Action::StartGame);
+	eventHandler.addCallback(Action::StartGame, [this](sf::Vector2i) { nextScene = SceneType::GamePlay; });
 }
 
 void MainMenuScene::render(sf::RenderWindow& window)
@@ -20,13 +22,8 @@ SceneType MainMenuScene::update(sf::Time deltaTime)
 
 SceneType MainMenuScene::processEvent(const sf::Event& event)
 {
-	if (const auto* keyPressed = event.getIf<sf::Event::KeyPressed>())
-	{
-		if (keyPressed->code == sf::Keyboard::Key::Space)
-		{
-			return SceneType::GamePlay;
-		}
-	}
-	return SceneType::None;
-}
+	nextScene = SceneType::None;
+	eventHandler.processEvent(event);
 
+	return nextScene;
+}

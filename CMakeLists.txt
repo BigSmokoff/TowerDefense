@@ -48,6 +48,12 @@ add_executable(${PROJECT_NAME}
 	src/Managers/PlayerState.cpp
 	src/Managers/UIManager.h
 	src/Managers/UIManager.cpp
+	src/Managers/EventHandler.h
+	src/Managers/EventHandler.cpp
+	src/Scenes/GameOverScene.h
+	src/Scenes/GameOverScene.cpp
+	src/Core/Level.h
+	src/Core/Level.cpp
 )
 
 # настройка рабочего каталога для Visual Studio

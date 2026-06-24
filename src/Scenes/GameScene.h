@@ -6,6 +6,7 @@
 #include "../Managers/WaveManager.h"
 #include "../Managers/PlayerState.h"
 #include "../Managers/UIManager.h"
+#include "../Managers/EventHandler.h"
 
 class GameScene : public IScene
 {
@@ -21,8 +22,10 @@ private:
 	std::vector<std::unique_ptr<GameObject>> monsters;
 	std::vector<std::unique_ptr<GameObject>> projectiles;
 	std::vector<std::unique_ptr<Tower>> towers;
-	TownHall townHall = TownHall({ 80.0f, 80.0f }, { 800.0f, 300.0f }, sf::Color::Blue);
+	TownHall townHall = TownHall({ 80.0f, 80.0f }, { 800.0f, 300.0f }, sf::Color::Blue, 0);
 	WaveManager waveManager = WaveManager(monsters);
 	PlayerState playerState;
 	UIManager uiManager;
+	EventHandler eventHandler;
+	SceneType nextScene = SceneType::None;
 };
