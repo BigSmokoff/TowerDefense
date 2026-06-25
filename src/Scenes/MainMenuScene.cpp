@@ -20,10 +20,10 @@ SceneType MainMenuScene::update(sf::Time deltaTime)
 	return SceneType::None;
 }
 
-SceneType MainMenuScene::processEvent(const sf::Event& event)
+SceneType MainMenuScene::processEvent(const sf::Event& event, const sf::RenderWindow& window)
 {
 	nextScene = SceneType::None;
-	eventHandler.processEvent(event);
+	eventHandler.processEvent(event, window);
 
 	return nextScene;
 }

@@ -13,4 +13,6 @@ public:
 	virtual sf::FloatRect getBounds() const = 0;
 	virtual void kill() {};
 	virtual sf::Vector2f getPosition() const { return {}; };
+	virtual void takeDamage(int damage) {}
+	virtual unsigned int getDamage() const { return 0; }
 };

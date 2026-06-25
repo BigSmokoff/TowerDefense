@@ -1,8 +1,8 @@
 #include "../GameObjects/Projectile.h"
 #include "../Core/Config.h"
 
-Projectile::Projectile(sf::Vector2f startPos, sf::Vector2f direction, sf::Color color, float speed, float radius)
-	:  direction(direction), speed(speed)
+Projectile::Projectile(sf::Vector2f startPos, sf::Vector2f direction, sf::Color color, float speed, float radius, unsigned int damage)
+	:  direction(direction), speed(speed), damage(damage)
 {
 	sprite.setRadius(radius);
 	sprite.setPosition(startPos);
@@ -42,4 +42,9 @@ sf::FloatRect Projectile::getBounds() const
 void Projectile::kill()
 {
 	dead = true;
+}
+
+unsigned int Projectile::getDamage() const
+{
+	return damage;
 }

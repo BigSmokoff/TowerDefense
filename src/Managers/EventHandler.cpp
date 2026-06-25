@@ -5,15 +5,15 @@ void EventHandler::bindInput(InputTrigger trigger, Action action)
 	bindings.emplace(trigger, action);
 }
 
-void EventHandler::addCallback(Action action, std::function<void(sf::Vector2i mousePos)> callback)
+void EventHandler::addCallback(Action action, std::function<void(sf::Vector2i mousePosition)> callback)
 {
 	callbacks.emplace(action, callback);
 }
 
-void EventHandler::processEvent(const sf::Event& event)
+void EventHandler::processEvent(const sf::Event& event, const sf::RenderWindow& window)
 {
 	InputTrigger triggeredInput;
-	sf::Vector2i mousePos(0, 0);
+	sf::Vector2i mousePosition(0, 0);
 	bool hasInput = false;
 
 	if (const auto* keyPressed = event.getIf<sf::Event::KeyPressed>())
@@ -25,7 +25,9 @@ void EventHandler::processEvent(const sf::Event& event)
 	else if (const auto* mousePressed = event.getIf<sf::Event::MouseButtonPressed>())
 	{
 		triggeredInput = mousePressed->button;
-		mousePos = mousePressed->position;
+		sf::Vector2f worldPos = window.mapPixelToCoords(mousePressed->position);
+
+		mousePosition = sf::Vector2i(static_cast<int>(worldPos.x), static_cast<int>(worldPos.y));
 		hasInput = true;
 	}
 
@@ -37,7 +39,7 @@ void EventHandler::processEvent(const sf::Event& event)
 			auto itCallback = callbacks.find(itAction->second);
 			if (itCallback != callbacks.end())
 			{
-				itCallback->second(mousePos);
+				itCallback->second(mousePosition);
 			}
 		}
 	}

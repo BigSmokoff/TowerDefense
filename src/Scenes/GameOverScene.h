@@ -11,7 +11,7 @@ public:
 
 	void render(sf::RenderWindow& window) override;
 	SceneType update(sf::Time deltaTime) override;
-	SceneType processEvent(const sf::Event& event) override;
+	SceneType processEvent(const sf::Event& event, const sf::RenderWindow& window) override;
 
 private:
 	sf::Font font;

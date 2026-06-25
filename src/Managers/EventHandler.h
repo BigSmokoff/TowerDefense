@@ -20,9 +20,9 @@ public:
 	EventHandler() = default;
 	~EventHandler() = default;
 
-	void processEvent(const sf::Event& event);
+	void processEvent(const sf::Event& event, const sf::RenderWindow& window);
 	void bindInput(InputTrigger trigger, Action action);
-	void addCallback(Action action, std::function<void(sf::Vector2i mousePos)> callback);
+	void addCallback(Action action, std::function<void(sf::Vector2i mousePosition)> callback);
 
 private:
 	// мап действий на вызовы

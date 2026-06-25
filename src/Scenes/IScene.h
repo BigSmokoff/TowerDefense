@@ -12,5 +12,5 @@ public:
 	// = 0 говорим компилятору что класс абстрактный
 	virtual void render(sf::RenderWindow& window) = 0;
 	virtual SceneType update(sf::Time deltaTime) = 0;
-	virtual SceneType processEvent(const sf::Event& event) = 0;
+	virtual SceneType processEvent(const sf::Event& event, const sf::RenderWindow& window) = 0;
 };

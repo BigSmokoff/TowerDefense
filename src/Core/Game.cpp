@@ -40,7 +40,7 @@ void Game::changeScene(SceneType nextScene)
 			currentScene = std::make_unique<MainMenuScene>(10.0f);
 			break;
 		case SceneType::GamePlay:
-			currentScene = std::make_unique<GameScene>();
+			currentScene = std::make_unique<GameScene>(window);
 			break;
 		case SceneType::GameOver:
 			currentScene = std::make_unique<GameOverScene>();
@@ -63,7 +63,7 @@ void Game::processEvents()
 			window.close();
 		}
 
-		SceneType nextScene = currentScene->processEvent(*event);
+		SceneType nextScene = currentScene->processEvent(*event, window);
 		changeScene(nextScene);
 		break;
 	}

@@ -40,10 +40,10 @@ SceneType GameOverScene::update(sf::Time deltaTime)
 	return SceneType::None;
 }
 
-SceneType GameOverScene::processEvent(const sf::Event& event)
+SceneType GameOverScene::processEvent(const sf::Event& event, const sf::RenderWindow& window)
 {
 	nextScene = SceneType::None;
-	eventHandler.processEvent(event);
+	eventHandler.processEvent(event, window);
 
 	return nextScene;
 }
